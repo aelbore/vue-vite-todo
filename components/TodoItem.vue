@@ -10,15 +10,13 @@
 export default {
   name: 'TodoItem',
   props: ['index', 'text', 'checked'],
-  methods: {
-    handleOnRemove() {
-      this.$emit('remove', this.index);
-    },
-    handleOnToggle() {
-      this.$emit('toggle', this.index);
-    },
-  },
-};
+  setup(props, context) {
+    const handleOnRemove = () => context.emit('remove', props.index)
+    const handleOnToggle = () => context.emit('toggle', props.index)
+
+    return { handleOnRemove, handleOnToggle }
+  }
+}
 </script>
 
 <style>

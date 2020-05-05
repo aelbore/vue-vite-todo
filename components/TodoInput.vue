@@ -7,18 +7,21 @@
     @keyup="submit" />
 </template>
 <script>
+import { ref } from 'vue'
+
 export default {
   name: 'TodoInput',
-  data() {
-    return { text: '' };
-  },
-  methods: {
-    submit(e) {
+  setup(props, context) {
+    const text = ref('')
+
+    function submit(e) {
       if (e.keyCode === 13) {
-        this.$emit('submit', this.text)
-        this.text = ''
+        context.emit('submit', text.value)
+        text.value = ''
       }
     }
+
+    return { text, submit }
   }
 }
 </script>

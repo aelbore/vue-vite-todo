@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+
 import TodoInput from './TodoInput.vue'
 import TodoItem from './TodoItem.vue'
 
@@ -27,28 +29,29 @@ export default {
     TodoInput,
     TodoItem
   },
-  data() {
-    return {
-      list: [
-        { text: 'my initial todo', checked: false },
-        { text: 'Learn about Web Components', checked: true },
-      ],
-    };
-  },
-  methods: {
-    handleOnSubmit(text) {
-      this.list = [...this.list, { text, checked: false }];
-    },
-    handleToggle(value) {
+  setup() {
+    const list = ref([
+      { text: 'my initial todo', checked: false },
+      { text: 'Learn about Web Components', checked: true },
+    ])
+
+    function handleOnSubmit(text) {
+      list.value = [...list.value, { text, checked: false }];
+    }
+
+    function handleToggle(value) {
       const index = parseInt(value)
-      this.list[index].checked = !this.list[index].checked
-    },
-    handleRemove(value) {
+      list.value[index].checked = !list.value[index].checked
+    }
+
+    function handleRemove(value) {
       const index = parseInt(value)
-      this.list = [...this.list.slice(0, index), ...this.list.slice(index + 1)]
-    },
-  },
-};
+      list.value = [...list.value.slice(0, index), ...list.value.slice(index + 1)]
+    }
+
+    return { list, handleOnSubmit, handleToggle, handleRemove }
+  }
+}
 </script>
 
 <style>
