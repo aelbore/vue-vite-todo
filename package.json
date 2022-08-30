@@ -10,7 +10,7 @@
     "vuex": "^3.5.1"
   },
   "devDependencies": {
-    "vite": "^1.0.0-rc.4",
+    "vite": "^2.9.13",
     "vite-plugin-vue2": "^0.2.0"
   }
 }
